@@ -7,13 +7,20 @@ part 'pay_state.dart';
 
 class PayBloc extends Bloc<PayEvent, PayState> {
   PayBloc() : super(const PayState()) {
-    @override
-    Stream<PayState> mapEventToState(PayEvent event) async* {
-      if (event is OnSelectedCard) {
-        yield state.copyWith(cardActivate: true, card: event.card);
-      } else if (event is OnDesactivateCard) {
-        yield state.copyWith(cardActivate: false);
-      }
-    }
+    on<OnSelectedCard>((event, emit) =>
+        emit(state.copyWith(cardActivate: true, card: event.card)));
+
+    on<OnDesactivateCard>((event, emit) => emit(state.copyWith(
+          cardActivate: false,
+        )));
+
+    // @override
+    // Stream<PayState> mapEventToState(PayEvent event) async* {
+    //  if (event is OnSelectedCard) {
+    //    yield state.copyWith(cardActivate: true, card: event.card);
+    // } else if (event is OnDesactivateCard) {
+    //   yield state.copyWith(cardActivate: false);
+    // }
+    // }
   }
 }
