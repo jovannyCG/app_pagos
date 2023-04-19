@@ -1,3 +1,4 @@
+import 'package:app_pagos/widget/total_pay_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 
@@ -43,7 +44,10 @@ class HomePage extends StatelessWidget {
                 onCreditCardWidgetChange: (CreditCardBrand ) {  }, 
                 showBackView: false,);
             }),
-          )
+          ),
+          Positioned(
+            bottom: 0,
+            child: TotalPayButton())
         ],
       )
    );
