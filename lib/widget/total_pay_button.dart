@@ -1,6 +1,8 @@
 import 'dart:io';
 
+import 'package:app_pagos/blocs/pay/pay_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class TotalPayButton extends StatelessWidget {
@@ -26,7 +28,7 @@ class TotalPayButton extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+              children: const [
                 Text(
                   'total',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
@@ -37,16 +39,24 @@ class TotalPayButton extends StatelessWidget {
                 ),
               ],
             ),
-            _BtnPay()
+            BlocBuilder<PayBloc, PayState>(
+              
+              builder: (context, state){
+                  return _BtnPay(state);
+              } ),
+            
           ],
         ));
   }
 }
 
 class _BtnPay extends StatelessWidget {
+  final PayState state;
+
+  const _BtnPay( this.state);
   @override
   Widget build(BuildContext context) {
-    return true ? buildAButtonCard(context) : buildAppleAndGooglePay(context);
+    return state.cardActivate ? buildAButtonCard(context) : buildAppleAndGooglePay(context);
   }
 
   Widget buildAButtonCard(BuildContext context) {
@@ -58,7 +68,7 @@ class _BtnPay extends StatelessWidget {
         color: Colors.black,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
+          children: const [
             Icon(
               FontAwesomeIcons.solidCreditCard,
               color: Colors.white,
@@ -88,7 +98,7 @@ class _BtnPay extends StatelessWidget {
                   : FontAwesomeIcons.apple,
               color: Colors.white,
             ),
-            Text(
+            const Text(
               'pagar',
               style: TextStyle(color: Colors.white, fontSize: 22),
             ),

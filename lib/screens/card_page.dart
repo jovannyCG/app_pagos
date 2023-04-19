@@ -1,27 +1,26 @@
 import 'package:app_pagos/models/credit_card.dart';
 import 'package:app_pagos/widget/total_pay_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_credit_card/credit_card_widget.dart';
+
+import '../blocs/pay/pay_bloc.dart';
 
 
 class CardPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final card = TarjetaCredito(
-      cardNumberHidden: '5555',
-      cardNumber: '5555555555554444',
-      brand: 'mastercard',
-      cvv: '213',
-      expiracyDate: '01/25',
-      cardHolderName: 'Melissa Flores'
-    );
+    final gpsBloc = BlocProvider.of<PayBloc>(context);
+     final card = BlocProvider.of<PayBloc>(context).state.card;
 
     return Scaffold(
       appBar: AppBar(
-        actions: [
-          IconButton(onPressed: (){}, icon: const Icon(Icons.add))
-        ],
+      leading:
+          IconButton(onPressed: (){
+            gpsBloc.add(OnDesactivateCard());
+          }, icon: const Icon(Icons.arrow_back)),
+        
         centerTitle: true,
         backgroundColor: const Color(0xff284879),
         title: const Text('pagos'),
@@ -31,7 +30,7 @@ class CardPage extends StatelessWidget {
           
           Container(),
           Hero(
-            tag: card.cardNumber,
+            tag: card!.cardNumber,
             child: CreditCardWidget(
                     cardHolderName: card.cardHolderName, 
                     cardNumber: card.cardNumberHidden, 

@@ -1,8 +1,9 @@
+import 'package:app_pagos/blocs/pay/pay_bloc.dart';
 import 'package:app_pagos/screens/card_page.dart';
 import 'package:app_pagos/widget/total_pay_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../data/cards.dart';
 import '../helpers/helpers.dart';
 
@@ -11,7 +12,10 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    final gpsBloc = BlocProvider.of<PayBloc>(context);
+    
+
+        final size = MediaQuery.of(context).size;
     return Scaffold(
         appBar: AppBar(
           actions: [
@@ -42,7 +46,9 @@ class HomePage extends StatelessWidget {
                     final card = tarjetas[i];
 
                     return GestureDetector(
+                        
                       onTap: () {
+                        gpsBloc.add(OnSelectedCard(card));
                         Navigator.push(
                             context, navegarMapaFadeIn(context, CardPage()));
                       },
