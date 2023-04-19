@@ -40,7 +40,7 @@ class CardPage extends StatelessWidget {
                     onCreditCardWidgetChange: (CreditCardBrand ) {  }, 
                     showBackView: false,),
           ),
-          Positioned(
+          const Positioned(
             bottom: 0,
             child: TotalPayButton())
         ],
