@@ -9,15 +9,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'stripeApp',
-      routes: {
-        'home': (_)=> HomePage(),
-        'pay': (_)=>  PayCompletePage()
-      },
+      routes: {'home': (_) => HomePage(), 'pay': (_) => PayCompletePage()},
       initialRoute: 'home',
       theme: ThemeData.light().copyWith(
-        primaryColor: Color(0xff284879),
-        scaffoldBackgroundColor: Color(0xff21232A)
-      ),
+        
+          primaryColor: const Color(0xff284879),
+          scaffoldBackgroundColor: const Color(0xff21232A)),
     );
   }
 }
