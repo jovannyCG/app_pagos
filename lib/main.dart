@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'stripeApp',
-      routes: {'home': (_) => HomePage(), 'pay': (_) => PayCompletePage()},
+      routes: {'home': (_) => const HomePage(), 'pay': (_) => const PayCompletePage()},
       initialRoute: 'home',
       theme: ThemeData.light().copyWith(
           primaryColor: const Color(0xff284879),
